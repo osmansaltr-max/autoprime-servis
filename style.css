@@ -4,23 +4,61 @@
     box-sizing: border-box;
 }
 
+:root {
+    --dark: #090b0d;
+    --dark-2: #11151a;
+    --dark-3: #191e24;
+
+    --red: #ff3b30;
+    --red-hover: #e63128;
+
+    --green: #25d366;
+
+    --light: #f5f5f5;
+    --white: #ffffff;
+
+    --text-muted: #666666;
+    --dark-muted: #b8bdc4;
+
+    --border-light: #e2e2e2;
+    --border-dark: #2a3037;
+}
+
 html {
     scroll-behavior: smooth;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #ffffff;
+
+    background: var(--white);
     color: #111111;
+
     line-height: 1.6;
+
+    overflow-x: hidden;
 }
 
 a {
+    color: inherit;
     text-decoration: none;
 }
 
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
 
-/* HEADER */
+section {
+    scroll-margin-top: 84px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 header {
     width: 100%;
@@ -32,19 +70,19 @@ header {
 
     padding: 0 8%;
 
-    background: #090b0d;
-
-    border-bottom: 1px solid #23262a;
-
     position: sticky;
     top: 0;
 
-    z-index: 1000;
+    z-index: 10000;
+
+    background: var(--dark);
+
+    border-bottom: 1px solid #23262a;
 }
 
 .logo,
 .footer-logo {
-    color: #ffffff;
+    color: var(--white);
 
     font-size: 25px;
     font-weight: 900;
@@ -54,7 +92,7 @@ header {
 
 .logo span,
 .footer-logo span {
-    color: #ff3b30;
+    color: var(--red);
 }
 
 nav {
@@ -77,36 +115,65 @@ nav a {
 }
 
 nav a:hover {
-    color: #ff3b30;
+    color: var(--red);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
 }
 
 .header-button {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
 
     padding: 13px 23px;
 
-    background: #ff3b30;
-
-    color: #ffffff;
-
     border-radius: 6px;
 
+    background: var(--red);
+    color: var(--white);
+
     font-weight: 700;
+
+    white-space: nowrap;
 
     transition: 0.25s;
 }
 
 .header-button:hover {
-    background: #e63128;
+    background: var(--red-hover);
 
     transform: translateY(-2px);
 }
 
+.mobile-menu-button {
+    display: none;
 
-/* HERO */
+    width: 44px;
+    height: 44px;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #34383d;
+    border-radius: 6px;
+
+    background: #15181c;
+    color: var(--white);
+
+    font-size: 23px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
 
 .hero {
     min-height: 620px;
@@ -119,10 +186,10 @@ nav a:hover {
     background-image:
         linear-gradient(
             90deg,
-            rgba(8,10,12,.98) 0%,
-            rgba(8,10,12,.92) 35%,
-            rgba(8,10,12,.55) 63%,
-            rgba(8,10,12,.15) 100%
+            rgba(8, 10, 12, .98) 0%,
+            rgba(8, 10, 12, .92) 35%,
+            rgba(8, 10, 12, .55) 63%,
+            rgba(8, 10, 12, .15) 100%
         ),
         url("./images/hero-car.jpg");
 
@@ -138,7 +205,9 @@ nav a:hover {
 .hero-small,
 .section-label,
 .section-title > p {
-    color: #ff3b30;
+    margin-bottom: 18px;
+
+    color: var(--red);
 
     font-size: 13px;
     font-weight: 800;
@@ -146,50 +215,46 @@ nav a:hover {
     letter-spacing: 2px;
 
     text-transform: uppercase;
-
-    margin-bottom: 18px;
 }
 
 .hero h1 {
-    color: #ffffff;
+    margin-bottom: 28px;
+
+    color: var(--white);
 
     font-size: clamp(55px, 6vw, 76px);
 
     line-height: 1;
 
     letter-spacing: -3px;
-
-    margin-bottom: 28px;
 }
 
 .hero h1 span {
     display: block;
 
-    color: #ff3b30;
+    color: var(--red);
 }
 
 .hero-description {
     max-width: 600px;
 
+    margin-bottom: 30px;
+
     color: #d1d5db;
 
     font-size: 17px;
-
-    margin-bottom: 30px;
 }
 
 .hero-buttons {
     display: flex;
+    flex-wrap: wrap;
 
     gap: 14px;
-
-    flex-wrap: wrap;
 }
 
 .primary-button,
 .secondary-button {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
 
@@ -205,34 +270,37 @@ nav a:hover {
 }
 
 .primary-button {
-    background: #ff3b30;
-
-    color: #ffffff;
+    background: var(--red);
+    color: var(--white);
 }
 
 .primary-button:hover {
-    background: #e63128;
+    background: var(--red-hover);
+
+    transform: translateY(-2px);
 }
 
 .secondary-button {
-    color: #ffffff;
+    color: var(--white);
 
     border: 1px solid #4a4f56;
 
-    background: rgba(8,10,12,.55);
+    background: rgba(8, 10, 12, .55);
 }
 
 .secondary-button:hover {
-    border-color: #ff3b30;
+    border-color: var(--red);
 }
 
 
-/* HİZMETLER */
+/* =====================================================
+   HİZMETLER
+===================================================== */
 
 .services {
     padding: 95px 8%;
 
-    background: #f5f5f5;
+    background: var(--light);
 }
 
 .section-title {
@@ -254,7 +322,7 @@ nav a:hover {
 
     margin-top: 15px;
 
-    color: #666666;
+    color: var(--text-muted);
 
     font-size: 16px;
 }
@@ -274,13 +342,12 @@ nav a:hover {
 
     padding: 32px 28px;
 
-    background: #ffffff;
-
-    border: 1px solid #e2e2e2;
-
-    border-radius: 10px;
-
     overflow: hidden;
+
+    background: var(--white);
+
+    border: 1px solid var(--border-light);
+    border-radius: 10px;
 
     transition: 0.3s;
 }
@@ -296,7 +363,7 @@ nav a:hover {
     width: 4px;
     height: 0;
 
-    background: #ff3b30;
+    background: var(--red);
 
     transition: 0.3s;
 }
@@ -308,7 +375,7 @@ nav a:hover {
 .service-card:hover {
     transform: translateY(-6px);
 
-    box-shadow: 0 16px 35px rgba(0,0,0,.08);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, .08);
 }
 
 .service-icon {
@@ -337,29 +404,30 @@ nav a:hover {
 .service-card p {
     min-height: 85px;
 
-    color: #666666;
+    margin-bottom: 20px;
+
+    color: var(--text-muted);
 
     font-size: 15px;
-
-    margin-bottom: 20px;
 }
 
 .service-card a {
-    color: #ff3b30;
+    color: var(--red);
 
     font-size: 14px;
     font-weight: 800;
 }
 
 
-/* HAKKIMIZDA */
+/* =====================================================
+   HAKKIMIZDA
+===================================================== */
 
 .about {
     padding: 100px 8%;
 
-    background: #11151a;
-
-    color: #ffffff;
+    background: var(--dark-2);
+    color: var(--white);
 }
 
 .about-container {
@@ -371,23 +439,23 @@ nav a:hover {
 .about h2 {
     max-width: 760px;
 
+    margin-bottom: 25px;
+
     font-size: 46px;
 
     line-height: 1.15;
 
     letter-spacing: -1.5px;
-
-    margin-bottom: 25px;
 }
 
 .about-container > p:not(.section-label) {
     max-width: 760px;
 
-    color: #b8bdc4;
+    margin-bottom: 40px;
+
+    color: var(--dark-muted);
 
     font-size: 17px;
-
-    margin-bottom: 40px;
 }
 
 .about-grid {
@@ -401,19 +469,18 @@ nav a:hover {
 .about-box {
     padding: 25px;
 
-    background: #191e24;
+    background: var(--dark-3);
 
-    border: 1px solid #2a3037;
-
+    border: 1px solid var(--border-dark);
     border-radius: 9px;
 }
 
 .about-box strong {
     display: block;
 
-    color: #ffffff;
-
     margin-bottom: 7px;
+
+    color: var(--white);
 }
 
 .about-box span {
@@ -423,14 +490,15 @@ nav a:hover {
 }
 
 
-/* RANDEVU */
+/* =====================================================
+   RANDEVU
+===================================================== */
 
 .appointment {
     padding: 100px 8%;
 
     background: #101317;
-
-    color: #ffffff;
+    color: var(--white);
 }
 
 .appointment-container {
@@ -448,21 +516,21 @@ nav a:hover {
 }
 
 .appointment-info h2 {
+    margin-bottom: 22px;
+
     font-size: 46px;
 
     line-height: 1.12;
 
     letter-spacing: -1.5px;
-
-    margin-bottom: 22px;
 }
 
 .appointment-info > p:not(.section-label) {
-    color: #b8bdc4;
+    margin-bottom: 30px;
+
+    color: var(--dark-muted);
 
     font-size: 16px;
-
-    margin-bottom: 30px;
 }
 
 .appointment-features {
@@ -476,18 +544,20 @@ nav a:hover {
 }
 
 
-/* FORM */
+/* =====================================================
+   FORM
+===================================================== */
 
 .appointment-form {
     width: 100%;
 
     padding: 35px;
 
-    background: #ffffff;
+    background: var(--white);
 
     border-radius: 14px;
 
-    box-shadow: 0 25px 70px rgba(0,0,0,.35);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, .35);
 }
 
 .form-row {
@@ -505,12 +575,12 @@ nav a:hover {
 .form-group label {
     display: block;
 
+    margin-bottom: 8px;
+
     color: #111111;
 
     font-size: 14px;
     font-weight: 700;
-
-    margin-bottom: 8px;
 }
 
 .form-group input,
@@ -520,25 +590,29 @@ nav a:hover {
 
     padding: 14px 15px;
 
+    outline: none;
+
     background: #f7f7f7;
 
     border: 1px solid #dddddd;
-
     border-radius: 7px;
+
+    color: #111111;
 
     font-size: 14px;
 
-    outline: none;
+    transition: 0.2s;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    background: #ffffff;
+    background: var(--white);
 
-    border-color: #ff3b30;
+    border-color: var(--red);
 
-    box-shadow: 0 0 0 3px rgba(255,59,48,.1);
+    box-shadow:
+        0 0 0 3px rgba(255, 59, 48, .1);
 }
 
 .form-group textarea {
@@ -547,18 +621,49 @@ nav a:hover {
     resize: vertical;
 }
 
+.form-status {
+    min-height: 20px;
+
+    margin-bottom: 12px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.form-status.error,
+.form-status.success {
+    padding: 10px 12px;
+}
+
+.form-status.error {
+    color: #a51f19;
+
+    background: #fff0ef;
+
+    border: 1px solid #ffd0cd;
+}
+
+.form-status.success {
+    color: #116c37;
+
+    background: #edfff4;
+
+    border: 1px solid #c6f1d6;
+}
+
 .appointment-submit {
     width: 100%;
 
     padding: 16px 20px;
 
     border: 0;
-
     border-radius: 7px;
 
-    background: #ff3b30;
+    background: var(--red);
 
-    color: #ffffff;
+    color: var(--white);
 
     font-size: 15px;
     font-weight: 800;
@@ -569,7 +674,7 @@ nav a:hover {
 }
 
 .appointment-submit:hover {
-    background: #e63128;
+    background: var(--red-hover);
 
     transform: translateY(-2px);
 }
@@ -585,12 +690,14 @@ nav a:hover {
 }
 
 
-/* İLETİŞİM */
+/* =====================================================
+   İLETİŞİM
+===================================================== */
 
 .contact {
     padding: 100px 8%;
 
-    background: #f5f5f5;
+    background: var(--light);
 }
 
 .contact-container {
@@ -608,19 +715,19 @@ nav a:hover {
 }
 
 .contact-info h2 {
+    margin-bottom: 20px;
+
     font-size: 46px;
 
     line-height: 1.15;
-
-    margin-bottom: 20px;
 }
 
 .contact-description {
     max-width: 600px;
 
-    color: #666666;
-
     margin-bottom: 35px;
+
+    color: var(--text-muted);
 }
 
 .contact-items {
@@ -644,14 +751,12 @@ nav a:hover {
     height: 46px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     flex-shrink: 0;
 
-    background: #ffffff;
+    background: var(--white);
 
     border-radius: 9px;
 }
@@ -664,25 +769,22 @@ nav a:hover {
 
 .contact-item p,
 .contact-item a {
-    color: #666666;
+    color: var(--text-muted);
 
     font-size: 14px;
 }
 
 .contact-buttons {
     display: flex;
+    flex-wrap: wrap;
 
     gap: 12px;
-
-    flex-wrap: wrap;
 }
 
 .contact-whatsapp,
 .contact-map {
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
 
     min-height: 48px;
@@ -692,18 +794,17 @@ nav a:hover {
     border-radius: 6px;
 
     font-size: 14px;
-
     font-weight: 700;
 }
 
 .contact-whatsapp {
-    background: #25d366;
+    background: var(--green);
 
-    color: #ffffff;
+    color: var(--white);
 }
 
 .contact-map {
-    background: #ffffff;
+    background: var(--white);
 
     color: #111111;
 
@@ -714,56 +815,57 @@ nav a:hover {
     min-height: 400px;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
 
     padding: 35px;
 
     text-align: center;
 
-    background: linear-gradient(
-        135deg,
-        #181c21,
-        #090b0d
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #181c21,
+            var(--dark)
+        );
 
-    color: #ffffff;
+    color: var(--white);
 
     border-radius: 14px;
 
-    box-shadow: 0 20px 50px rgba(0,0,0,.15);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, .15);
 }
 
 .contact-card-pin {
-    font-size: 44px;
-
     margin-bottom: 15px;
+
+    font-size: 44px;
 }
 
 .contact-card h3 {
-    font-size: 28px;
-
     margin-bottom: 7px;
+
+    font-size: 28px;
 }
 
 .contact-card p {
-    color: #aeb4bb;
-
     margin-bottom: 15px;
+
+    color: #aeb4bb;
 }
 
 .contact-card a {
-    color: #ff3b30;
+    color: var(--red);
 
     font-weight: 700;
 }
 
 
-/* FOOTER */
+/* =====================================================
+   FOOTER
+===================================================== */
 
 footer {
     padding: 55px 8% 35px;
@@ -794,37 +896,40 @@ footer p {
 }
 
 
-/* WHATSAPP */
+/* =====================================================
+   WHATSAPP
+===================================================== */
 
 .floating-whatsapp {
     position: fixed;
 
     right: 24px;
-
     bottom: 24px;
 
     width: 58px;
     height: 58px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    background: #25d366;
+    background: var(--green);
 
-    color: #ffffff;
+    color: var(--white);
 
     border-radius: 50%;
 
-    font-size: 27px;
+    z-index: 999999;
 
-    box-shadow: 0 8px 25px rgba(0,0,0,.28);
-
-    z-index: 9999;
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, .28);
 
     transition: 0.25s;
+}
+
+.floating-whatsapp svg {
+    width: 30px;
+    height: 30px;
 }
 
 .floating-whatsapp:hover {
@@ -832,7 +937,9 @@ footer p {
 }
 
 
-/* TABLET */
+/* =====================================================
+   TABLET
+===================================================== */
 
 @media (max-width: 950px) {
 
@@ -845,7 +952,8 @@ footer p {
     }
 
     .service-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
     .appointment-container,
@@ -854,224 +962,113 @@ footer p {
 
         gap: 45px;
     }
+
 }
 
 
-/* MOBİL */
-
-@media (max-width: 700px) {
-
-    header {
-        height: 70px;
-
-        padding: 0 5%;
-    }
-
-    nav {
-        display: none;
-    }
-
-    .logo {
-        font-size: 21px;
-    }
-
-    .header-button {
-        padding: 10px 15px;
-
-        font-size: 13px;
-    }
-
-    .hero {
-        min-height: 590px;
-
-        padding: 65px 6%;
-
-        background-position: 65% center;
-    }
-
-    .hero h1 {
-        font-size: 48px;
-
-        letter-spacing: -2px;
-    }
-
-    .services,
-    .about,
-    .appointment,
-    .contact {
-        padding: 70px 6%;
-    }
-
-    .service-container,
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-
-        gap: 0;
-    }
-
-    .appointment-form {
-        padding: 24px 18px;
-    }
-
-    .section-title h2,
-    .about h2,
-    .appointment-info h2,
-    .contact-info h2 {
-        font-size: 34px;
-    }
-
-    .contact-buttons {
-        flex-direction: column;
-    }
-
-    .contact-whatsapp,
-    .contact-map {
-        width: 100%;
-    }
-
-    .contact-card {
-        min-height: 300px;
-    }
-}.floating-whatsapp {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-
-    position: fixed !important;
-    right: 24px !important;
-    bottom: 24px !important;
-
-    width: 60px !important;
-    height: 60px !important;
-
-    align-items: center !important;
-    justify-content: center !important;
-
-    background: #25d366 !important;
-    color: #ffffff !important;
-
-    border-radius: 50% !important;
-
-    font-size: 28px !important;
-    text-decoration: none !important;
-
-    z-index: 999999 !important;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35) !important;
-}/* =====================================================
-   MOBİL SON DÜZELTMELER
+/* =====================================================
+   MOBİL
 ===================================================== */
 
 @media (max-width: 700px) {
 
-    #randevu {
-        scroll-margin-top: 78px;
+    section {
+        scroll-margin-top: 72px;
     }
 
-    .appointment {
-        padding-top: 55px;
-        padding-bottom: 70px;
-    }
-
-    .appointment-info h2 {
-        font-size: 31px;
-        line-height: 1.12;
-    }
-
-    .appointment-info > p:not(.section-label) {
-        font-size: 15px;
-        line-height: 1.65;
-    }
-
-    .appointment-features {
-        gap: 10px;
-        margin-bottom: 10px;
-    }
-
-    .appointment-features div {
-        font-size: 14px;
-    }
-
-    .appointment-form {
-        margin-top: 12px;
-    }
-
-    .floating-whatsapp {
-        width: 52px;
-        height: 52px;
-
-        right: 14px;
-        bottom: 14px;
-    }
-
-    .floating-whatsapp svg {
-        width: 27px;
-        height: 27px;
-    }
-}/* =====================================================
-   AUTOPRIME - MOBİL SON TASARIM DÜZELTMESİ
-===================================================== */
-
-@media (max-width: 700px) {
 
     /* HEADER */
 
     header {
         height: 72px;
-        padding: 0 20px;
 
-        position: sticky;
-        top: 0;
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        background: #090b0d;
+        padding: 0 18px;
     }
 
     .logo {
-        font-size: 22px;
+        font-size: 21px;
+
         flex-shrink: 0;
     }
 
-    nav {
-        display: none !important;
+    .header-button {
+        padding: 10px 13px;
+
+        font-size: 12px;
     }
 
-    .header-button {
-        padding: 11px 16px;
-        font-size: 13px;
-        border-radius: 6px;
-        white-space: nowrap;
+    .mobile-menu-button {
+        display: flex;
+    }
+
+    header nav {
+        display: none;
+
+        position: absolute;
+
+        top: 72px;
+        left: 0;
+
+        width: 100%;
+
+        margin: 0;
+
+        padding: 12px 18px 18px;
+
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 0;
+
+        background: var(--dark);
+
+        border-top: 1px solid #25292e;
+        border-bottom: 1px solid #25292e;
+
+        box-shadow:
+            0 15px 30px rgba(0, 0, 0, .25);
+    }
+
+    header nav.mobile-open {
+        display: flex;
+    }
+
+    header nav a {
+        display: block;
+
+        padding: 14px 6px;
+
+        color: var(--white);
+
+        border-bottom: 1px solid #202429;
+
+        font-size: 15px;
+    }
+
+    header nav a:last-child {
+        border-bottom: 0;
     }
 
 
     /* HERO */
 
     .hero {
-        min-height: calc(100vh - 72px);
+        min-height:
+            calc(100vh - 72px);
 
         padding: 70px 24px 65px;
-
-        display: flex;
-        align-items: center;
 
         background-image:
             linear-gradient(
                 90deg,
-                rgba(8,10,12,.97) 0%,
-                rgba(8,10,12,.88) 46%,
-                rgba(8,10,12,.45) 100%
+                rgba(8, 10, 12, .97) 0%,
+                rgba(8, 10, 12, .88) 46%,
+                rgba(8, 10, 12, .45) 100%
             ),
             url("./images/hero-car.jpg");
 
-        background-size: cover;
-        background-position: 62% center;
+        background-position:
+            62% center;
     }
 
     .hero-content {
@@ -1079,33 +1076,34 @@ footer p {
     }
 
     .hero-small {
-        font-size: 11px;
-        letter-spacing: 1.8px;
         margin-bottom: 18px;
+
+        font-size: 11px;
+
+        letter-spacing: 1.8px;
     }
 
     .hero h1 {
-        font-size: 42px;
-        line-height: 1.02;
-        letter-spacing: -2px;
         margin-bottom: 26px;
-    }
 
-    .hero h1 span {
-        margin-top: 3px;
+        font-size: 42px;
+
+        line-height: 1.02;
+
+        letter-spacing: -2px;
     }
 
     .hero-description {
         max-width: 330px;
 
-        font-size: 15px;
-        line-height: 1.75;
-
         margin-bottom: 28px;
+
+        font-size: 15px;
+
+        line-height: 1.75;
     }
 
     .hero-buttons {
-        display: flex;
         flex-direction: column;
 
         align-items: flex-start;
@@ -1117,22 +1115,19 @@ footer p {
     .secondary-button {
         min-height: 50px;
 
-        width: auto;
-
         padding: 0 22px;
 
         font-size: 14px;
     }
 
 
-    /* BÖLÜM GENEL BAŞLIKLARI */
+    /* BÖLÜMLER */
 
     .services,
     .about,
     .appointment,
     .contact {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding: 70px 24px;
     }
 
     .section-title {
@@ -1144,26 +1139,34 @@ footer p {
     .appointment-info h2,
     .contact-info h2 {
         font-size: 32px;
+
         line-height: 1.12;
+
         letter-spacing: -1px;
     }
 
     .section-title > p,
     .section-label {
         font-size: 11px;
+
         letter-spacing: 1.7px;
     }
 
 
-    /* HİZMET KARTLARI */
+    /* HİZMET */
+
+    .service-container,
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
 
     .service-container {
-        grid-template-columns: 1fr;
         gap: 16px;
     }
 
     .service-card {
         min-height: auto;
+
         padding: 25px 22px;
     }
 
@@ -1172,32 +1175,17 @@ footer p {
     }
 
 
-    /* HAKKIMIZDA */
-
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-
-
     /* RANDEVU */
 
-    #randevu {
-        scroll-margin-top: 72px;
-    }
-
-    .appointment {
-        padding-top: 65px;
-        padding-bottom: 70px;
-    }
-
     .appointment-container {
-        display: grid;
         grid-template-columns: 1fr;
+
         gap: 35px;
     }
 
     .appointment-info > p:not(.section-label) {
         font-size: 15px;
+
         line-height: 1.7;
     }
 
@@ -1211,11 +1199,13 @@ footer p {
 
     .appointment-form {
         padding: 22px 18px;
+
         border-radius: 12px;
     }
 
     .form-row {
         grid-template-columns: 1fr;
+
         gap: 0;
     }
 
@@ -1230,6 +1220,7 @@ footer p {
 
     .contact-container {
         grid-template-columns: 1fr;
+
         gap: 35px;
     }
 
@@ -1247,128 +1238,61 @@ footer p {
     }
 
 
-    /* WHATSAPP SABİT BUTON */
+    /* WHATSAPP */
 
     .floating-whatsapp {
-        width: 50px !important;
-        height: 50px !important;
+        right: 14px;
 
-        right: 14px !important;
-        bottom: 14px !important;
+        bottom: 14px;
+
+        width: 50px;
+        height: 50px;
     }
 
     .floating-whatsapp svg {
-        width: 26px !important;
-        height: 26px !important;
+        width: 26px;
+        height: 26px;
     }
 
 
     /* FOOTER */
 
     footer {
-        padding: 45px 24px 25px;
+        padding:
+            45px 24px 25px;
     }
-}/* =====================================================
-   MOBİL MENÜ
+
+}
+
+
+/* =====================================================
+   ÇOK KÜÇÜK TELEFON
 ===================================================== */
 
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.mobile-menu-button {
-    display: none;
-
-    width: 44px;
-    height: 44px;
-
-    border: 1px solid #34383d;
-    border-radius: 6px;
-
-    background: #15181c;
-    color: #ffffff;
-
-    font-size: 23px;
-
-    cursor: pointer;
-}
-
-@media (max-width: 700px) {
+@media (max-width: 380px) {
 
     header {
-        position: sticky;
-        top: 0;
-
-        height: 72px;
-
-        padding: 0 18px;
-
-        z-index: 10000;
-    }
-
-    .logo {
-        font-size: 21px;
+        padding: 0 12px;
     }
 
     .header-button {
-        padding: 10px 13px;
-        font-size: 12px;
+        padding: 9px 10px;
+
+        font-size: 11px;
     }
 
     .mobile-menu-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 40px;
+        height: 40px;
     }
 
-    header nav {
-        display: none !important;
-
-        position: absolute;
-
-        top: 72px;
-        left: 0;
-
-        width: 100%;
-
-        padding: 12px 18px 18px;
-
-        flex-direction: column;
-        align-items: stretch;
-
-        gap: 0;
-
-        background: #090b0d;
-
-        border-top: 1px solid #25292e;
-        border-bottom: 1px solid #25292e;
-
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+    .hero {
+        padding-left: 18px;
+        padding-right: 18px;
     }
 
-    header nav.mobile-open {
-        display: flex !important;
+    .hero h1 {
+        font-size: 38px;
     }
 
-    header nav a {
-        display: block;
-
-        padding: 14px 6px;
-
-        color: #ffffff;
-
-        border-bottom: 1px solid #202429;
-
-        font-size: 15px;
-    }
-
-    header nav a:last-child {
-        border-bottom: 0;
-    }
-
-    header nav a:hover {
-        color: #ff3b30;
-    }
 }

@@ -3,9 +3,20 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AutoPrime | Özel Oto Servis</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="AutoPrime Beylikdüzü özel oto servis. Periyodik bakım, arıza tespiti, fren, süspansiyon, elektrik, klima ve mekanik onarım hizmetleri."
+    >
+
+    <meta name="theme-color" content="#090b0d">
+
+    <title>AutoPrime | Beylikdüzü Özel Oto Servis</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,9 +25,9 @@
 
 <header>
 
-    <div class="logo">
+    <a href="#anasayfa" class="logo" aria-label="AutoPrime ana sayfa">
         Auto<span>Prime</span>
-    </div>
+    </a>
 
     <nav id="mainNav">
         <a href="#anasayfa">Ana Sayfa</a>
@@ -28,16 +39,19 @@
     <div class="header-actions">
 
         <a href="#randevu" class="header-button">
-          Randevu Al →
+            Randevu Al →
         </a>
 
         <button
-    class="mobile-menu-button"
-    id="mobileMenuButton"
-    aria-label="Menüyü aç"
->
-    ☰
-</button>
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            type="button"
+            aria-label="Menüyü aç"
+            aria-expanded="false"
+            aria-controls="mainNav"
+        >
+            ☰
+        </button>
 
     </div>
 
@@ -102,10 +116,9 @@
 
         </div>
 
-
         <div class="service-container">
 
-            <div class="service-card">
+            <article class="service-card">
 
                 <div class="service-icon">🛢️</div>
 
@@ -116,14 +129,12 @@
                     tarafından detaylı şekilde gerçekleştirilir.
                 </p>
 
-                <a href="#randevu">
-                    Randevu Al →
-                </a>
+                <a href="#randevu">Randevu Al →</a>
 
-            </div>
+            </article>
 
 
-            <div class="service-card">
+            <article class="service-card">
 
                 <div class="service-icon">💻</div>
 
@@ -134,14 +145,12 @@
                     sorunları hızlı ve doğru şekilde belirliyoruz.
                 </p>
 
-                <a href="#randevu">
-                    Randevu Al →
-                </a>
+                <a href="#randevu">Randevu Al →</a>
 
-            </div>
+            </article>
 
 
-            <div class="service-card">
+            <article class="service-card">
 
                 <div class="service-icon">🛞</div>
 
@@ -152,14 +161,12 @@
                     şekilde kontrol ediyoruz.
                 </p>
 
-                <a href="#randevu">
-                    Randevu Al →
-                </a>
+                <a href="#randevu">Randevu Al →</a>
 
-            </div>
+            </article>
 
 
-            <div class="service-card">
+            <article class="service-card">
 
                 <div class="service-icon">🔋</div>
 
@@ -170,14 +177,12 @@
                     profesyonel ekipmanlarla kontrol ediyoruz.
                 </p>
 
-                <a href="#randevu">
-                    Randevu Al →
-                </a>
+                <a href="#randevu">Randevu Al →</a>
 
-            </div>
+            </article>
 
 
-            <div class="service-card">
+            <article class="service-card">
 
                 <div class="service-icon">❄️</div>
 
@@ -188,14 +193,12 @@
                     iklimlendirme sistemini verimli hale getiriyoruz.
                 </p>
 
-                <a href="#randevu">
-                    Randevu Al →
-                </a>
+                <a href="#randevu">Randevu Al →</a>
 
-            </div>
+            </article>
 
 
-            <div class="service-card">
+            <article class="service-card">
 
                 <div class="service-icon">🔧</div>
 
@@ -206,11 +209,9 @@
                     ve onarım hizmeti sunuyoruz.
                 </p>
 
-                <a href="#randevu">
-                    Randevu Al →
-                </a>
+                <a href="#randevu">Randevu Al →</a>
 
-            </div>
+            </article>
 
         </div>
 
@@ -237,7 +238,6 @@
                 Yapılacak işlemler hakkında müşterilerimizi bilgilendiriyor
                 ve ihtiyaç dışı işlem uygulamıyoruz.
             </p>
-
 
             <div class="about-grid">
 
@@ -285,46 +285,49 @@
                 </h2>
 
                 <p>
-                    Bilgilerinizi girin, ihtiyacınız olan hizmeti seçin.
-                    Randevu talebiniz WhatsApp üzerinden hazır mesaj
-                    olarak oluşturulsun.
+                    Araç ve iletişim bilgilerinizi girin, hizmeti ve
+                    uygun olduğunuz zamanı seçin. Talebiniz WhatsApp
+                    üzerinden hazır mesaj olarak oluşturulsun.
                 </p>
 
-
                 <div class="appointment-features">
-
                     <div>✓ Hızlı randevu talebi</div>
                     <div>✓ Mobil uyumlu</div>
                     <div>✓ WhatsApp ile doğrudan iletişim</div>
                     <div>✓ Ekstra üyelik gerektirmez</div>
-
                 </div>
 
             </div>
 
 
-            <form id="appointmentForm" class="appointment-form">
+            <form
+                id="appointmentForm"
+                class="appointment-form"
+                novalidate
+            >
 
                 <div class="form-row">
 
                     <div class="form-group">
-                        <label for="name">Ad Soyad</label>
+                        <label for="name">Ad Soyad *</label>
 
                         <input
                             type="text"
                             id="name"
+                            autocomplete="name"
                             placeholder="Adınızı ve soyadınızı yazın"
                             required
                         >
                     </div>
 
-
                     <div class="form-group">
-                        <label for="phone">Telefon</label>
+                        <label for="phone">Telefon *</label>
 
                         <input
                             type="tel"
                             id="phone"
+                            autocomplete="tel"
+                            inputmode="tel"
                             placeholder="05xx xxx xx xx"
                             required
                         >
@@ -338,7 +341,7 @@
                     <div class="form-group">
 
                         <label for="car">
-                            Araç Marka / Model
+                            Araç Marka / Model *
                         </label>
 
                         <input
@@ -350,11 +353,46 @@
 
                     </div>
 
+                    <div class="form-group">
+
+                        <label for="plate">
+                            Plaka
+                        </label>
+
+                        <input
+                            type="text"
+                            id="plate"
+                            maxlength="12"
+                            placeholder="Örn: 34 ABC 123"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="km">
+                            Kilometre
+                        </label>
+
+                        <input
+                            type="number"
+                            id="km"
+                            min="0"
+                            inputmode="numeric"
+                            placeholder="Örn: 85000"
+                        >
+
+                    </div>
 
                     <div class="form-group">
 
                         <label for="service">
-                            Hizmet
+                            Hizmet *
                         </label>
 
                         <select id="service" required>
@@ -399,7 +437,7 @@
                     <div class="form-group">
 
                         <label for="date">
-                            Tarih
+                            Tarih *
                         </label>
 
                         <input
@@ -410,11 +448,10 @@
 
                     </div>
 
-
                     <div class="form-group">
 
                         <label for="time">
-                            Saat
+                            Saat *
                         </label>
 
                         <select id="time" required>
@@ -449,10 +486,19 @@
                     <textarea
                         id="note"
                         rows="4"
+                        maxlength="500"
                         placeholder="Aracınızla ilgili eklemek istediğiniz bir bilgi varsa yazabilirsiniz."
                     ></textarea>
 
                 </div>
+
+
+                <p
+                    id="formStatus"
+                    class="form-status"
+                    role="status"
+                    aria-live="polite"
+                ></p>
 
 
                 <button
@@ -462,9 +508,9 @@
                     WhatsApp ile Randevu Talebi Gönder
                 </button>
 
-
                 <p class="form-note">
-                    Gönder butonuna bastığınızda WhatsApp açılır ve bilgileriniz hazır mesaj olarak oluşturulur.
+                    Bu form kesin randevu oluşturmaz. Servis tarafından
+                    WhatsApp üzerinden uygunluk teyidi yapılır.
                 </p>
 
             </form>
@@ -500,9 +546,7 @@
 
                     <div class="contact-item">
 
-                        <div class="contact-icon">
-                            📍
-                        </div>
+                        <div class="contact-icon">📍</div>
 
                         <div>
                             <h3>Adres</h3>
@@ -514,9 +558,7 @@
 
                     <div class="contact-item">
 
-                        <div class="contact-icon">
-                            📞
-                        </div>
+                        <div class="contact-icon">📞</div>
 
                         <div>
 
@@ -533,21 +575,14 @@
 
                     <div class="contact-item">
 
-                        <div class="contact-icon">
-                            🕒
-                        </div>
+                        <div class="contact-icon">🕒</div>
 
                         <div>
 
                             <h3>Çalışma Saatleri</h3>
 
-                            <p>
-                                Pazartesi - Cumartesi
-                            </p>
-
-                            <p>
-                                09:00 - 18:00
-                            </p>
+                            <p>Pazartesi - Cumartesi</p>
+                            <p>09:00 - 18:00</p>
 
                         </div>
 
@@ -561,6 +596,7 @@
                     <a
                         href="https://wa.me/905555555555"
                         target="_blank"
+                        rel="noopener noreferrer"
                         class="contact-whatsapp"
                     >
                         WhatsApp'tan Yaz
@@ -569,6 +605,7 @@
                     <a
                         href="https://www.google.com/maps/search/?api=1&query=Beylikdüzü+İstanbul"
                         target="_blank"
+                        rel="noopener noreferrer"
                         class="contact-map"
                     >
                         Konumu Aç
@@ -581,17 +618,11 @@
 
             <div class="contact-card">
 
-                <span class="contact-card-pin">
-                    📍
-                </span>
+                <span class="contact-card-pin">📍</span>
 
-                <h3>
-                    AutoPrime
-                </h3>
+                <h3>AutoPrime</h3>
 
-                <p>
-                    Beylikdüzü / İstanbul
-                </p>
+                <p>Beylikdüzü / İstanbul</p>
 
                 <p>
                     Pazartesi - Cumartesi<br>
@@ -601,6 +632,7 @@
                 <a
                     href="https://www.google.com/maps/search/?api=1&query=Beylikdüzü+İstanbul"
                     target="_blank"
+                    rel="noopener noreferrer"
                 >
                     Google Maps'te Görüntüle →
                 </a>
@@ -620,16 +652,12 @@
         Auto<span>Prime</span>
     </div>
 
-    <p>
-        Beylikdüzü / İstanbul
-    </p>
+    <p>Beylikdüzü / İstanbul</p>
 
-    <p>
-        0555 555 55 55
-    </p>
+    <p>0555 555 55 55</p>
 
     <p class="copyright">
-        © 2026 AutoPrime. Tüm hakları saklıdır.
+        © <span id="currentYear">2026</span> AutoPrime. Tüm hakları saklıdır.
     </p>
 
 </footer>
@@ -638,26 +666,30 @@
 <a
     href="https://wa.me/905555555555"
     target="_blank"
+    rel="noopener noreferrer"
     class="floating-whatsapp"
     aria-label="WhatsApp ile iletişime geç"
 >
-    <svg
-        viewBox="0 0 32 32"
-        aria-hidden="true"
-    >
+
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+
         <path
             fill="currentColor"
             d="M19.11 17.21c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.35-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27s.98 2.63 1.11 2.81c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.65.21 1.24.18 1.71.11.52-.08 1.6-.65 1.82-1.28.23-.63.23-1.17.16-1.28-.07-.12-.25-.18-.52-.32z"
         />
+
         <path
             fill="currentColor"
             d="M16.03 3.2c-7.05 0-12.78 5.69-12.78 12.69 0 2.23.59 4.41 1.71 6.32L3.14 28.8l6.77-1.77a12.9 12.9 0 0 0 6.11 1.55h.01c7.04 0 12.78-5.69 12.78-12.69S23.08 3.2 16.03 3.2zm0 23.24h-.01a10.74 10.74 0 0 1-5.47-1.49l-.39-.23-4.02 1.05 1.07-3.9-.25-.4a10.5 10.5 0 0 1-1.63-5.58c0-5.83 4.8-10.56 10.7-10.56 5.9 0 10.7 4.73 10.7 10.56 0 5.82-4.8 10.55-10.7 10.55z"
         />
+
     </svg>
+
 </a>
 
 
 <script src="script.js"></script>
 
 </body>
+
 </html>

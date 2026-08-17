@@ -1,131 +1,217 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // =====================================================
-    // AUTOPRIME - GENEL AYARLAR
+    // AUTOPRIME AYARLARI
     // =====================================================
 
-    // Gerçek işletmede yalnızca bu numarayı değiştireceğiz.
-    // + işareti, boşluk veya 0 kullanma.
-    // Örnek: 0532 123 45 67 -> 905321234567
+    // Gerçek müşteride değiştirilecek ana numara.
+    // +, boşluk ve başta 0 kullanma.
     const whatsappNumber = "905555555555";
 
+    const businessPhone = "+905555555555";
+
 
     // =====================================================
-    // YUMUŞAK SAYFA GEÇİŞLERİ
+    // ELEMENTLER
     // =====================================================
 
-    const internalLinks =
-        document.querySelectorAll('a[href^="#"]');
+    const mainNav = document.getElementById("mainNav");
+    const mobileMenuButton = document.getElementById("mobileMenuButton");
 
-    internalLinks.forEach(function (link) {
+    const appointmentForm = document.getElementById("appointmentForm");
 
-        link.addEventListener("click", function (event) {
+    const nameInput = document.getElementById("name");
+    const phoneInput = document.getElementById("phone");
 
-            const targetId =
-                link.getAttribute("href");
+    const carInput = document.getElementById("car");
+    const plateInput = document.getElementById("plate");
+    const kmInput = document.getElementById("km");
 
-            if (!targetId || targetId === "#") {
-                return;
-            }
+    const serviceSelect = document.getElementById("service");
 
-            const target =
-                document.querySelector(targetId);
+    const dateInput = document.getElementById("date");
+    const timeSelect = document.getElementById("time");
 
-            if (!target) {
-                return;
-            }
+    const noteInput = document.getElementById("note");
 
-            event.preventDefault();
+    const formStatus = document.getElementById("formStatus");
 
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
+
+    // =====================================================
+    // MOBİL MENÜ
+    // =====================================================
+
+    if (mobileMenuButton && mainNav) {
+
+        mobileMenuButton.addEventListener("click", function () {
+
+            const isOpen =
+                mainNav.classList.toggle("mobile-open");
+
+            mobileMenuButton.textContent =
+                isOpen ? "✕" : "☰";
+
+            mobileMenuButton.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
+
+            mobileMenuButton.setAttribute(
+                "aria-label",
+                isOpen ? "Menüyü kapat" : "Menüyü aç"
+            );
+
+        });
+
+
+        mainNav.querySelectorAll("a").forEach(function (link) {
+
+            link.addEventListener("click", function () {
+
+                mainNav.classList.remove("mobile-open");
+
+                mobileMenuButton.textContent = "☰";
+
+                mobileMenuButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                mobileMenuButton.setAttribute(
+                    "aria-label",
+                    "Menüyü aç"
+                );
+
             });
 
         });
 
-    });
 
+        document.addEventListener("keydown", function (event) {
 
-    // =====================================================
-    // HİZMET KARTINDAN RANDEVU FORMUNA
-    // OTOMATİK HİZMET SEÇİMİ
-    // =====================================================
+            if (event.key === "Escape") {
 
-    const serviceSelect =
-        document.getElementById("service");
+                mainNav.classList.remove("mobile-open");
 
-    const serviceCards =
-        document.querySelectorAll(".service-card");
+                mobileMenuButton.textContent = "☰";
 
-    serviceCards.forEach(function (card) {
-
-        const serviceTitle =
-            card.querySelector("h3");
-
-        const appointmentButton =
-            card.querySelector('a[href="#randevu"]');
-
-        if (!serviceTitle || !appointmentButton) {
-            return;
-        }
-
-        appointmentButton.addEventListener(
-            "click",
-            function () {
-
-                const selectedService =
-                    serviceTitle.textContent.trim();
-
-                if (serviceSelect) {
-
-                    serviceSelect.value =
-                        selectedService;
-
-                }
+                mobileMenuButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
 
             }
-        );
 
-    });
-
-
-    // =====================================================
-    // TARİH AYARI
-    // GEÇMİŞ TARİH SEÇİLMESİN
-    // =====================================================
-
-    const dateInput =
-        document.getElementById("date");
-
-    if (dateInput) {
-
-        const today =
-            new Date();
-
-        const year =
-            today.getFullYear();
-
-        const month =
-            String(today.getMonth() + 1)
-                .padStart(2, "0");
-
-        const day =
-            String(today.getDate())
-                .padStart(2, "0");
-
-        const minimumDate =
-            `${year}-${month}-${day}`;
-
-        dateInput.min =
-            minimumDate;
+        });
 
     }
 
 
     // =====================================================
-    // TARİHİ TÜRKÇE FORMATA ÇEVİR
-    // 2026-08-20 -> 20.08.2026
+    // YUMUŞAK SAYFA GEÇİŞİ
+    // =====================================================
+
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(function (link) {
+
+            link.addEventListener("click", function (event) {
+
+                const targetId =
+                    link.getAttribute("href");
+
+                if (!targetId || targetId === "#") {
+                    return;
+                }
+
+                const target =
+                    document.querySelector(targetId);
+
+                if (!target) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+                history.replaceState(
+                    null,
+                    "",
+                    targetId
+                );
+
+            });
+
+        });
+
+
+    // =====================================================
+    // HİZMET KARTI -> FORMDA OTOMATİK SEÇİM
+    // =====================================================
+
+    document
+        .querySelectorAll(".service-card")
+        .forEach(function (card) {
+
+            const serviceTitle =
+                card.querySelector("h3");
+
+            const button =
+                card.querySelector('a[href="#randevu"]');
+
+            if (!serviceTitle || !button) {
+                return;
+            }
+
+            button.addEventListener("click", function () {
+
+                if (serviceSelect) {
+
+                    serviceSelect.value =
+                        serviceTitle.textContent.trim();
+
+                }
+
+            });
+
+        });
+
+
+    // =====================================================
+    // BUGÜNDEN ÖNCEKİ TARİHLERİ KAPAT
+    // =====================================================
+
+    function getLocalDateString(date) {
+
+        const year = date.getFullYear();
+
+        const month =
+            String(date.getMonth() + 1)
+                .padStart(2, "0");
+
+        const day =
+            String(date.getDate())
+                .padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+
+    }
+
+
+    if (dateInput) {
+
+        dateInput.min =
+            getLocalDateString(new Date());
+
+    }
+
+
+    // =====================================================
+    // TARİH FORMATLAMA
     // =====================================================
 
     function formatDate(dateValue) {
@@ -147,41 +233,80 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =====================================================
-    // TELEFON NUMARASI TEMEL KONTROL
+    // TELEFON KONTROLÜ
     // =====================================================
+
+    function getCleanPhone(phone) {
+
+        return phone.replace(/\D/g, "");
+
+    }
+
 
     function isValidPhone(phone) {
 
-        const cleanPhone =
-            phone.replace(/\D/g, "");
+        let cleanPhone =
+            getCleanPhone(phone);
 
-        return cleanPhone.length >= 10 &&
-               cleanPhone.length <= 11;
+        if (
+            cleanPhone.length === 12 &&
+            cleanPhone.startsWith("90")
+        ) {
+            cleanPhone = cleanPhone.slice(2);
+        }
+
+        return (
+            cleanPhone.length === 10 ||
+            (
+                cleanPhone.length === 11 &&
+                cleanPhone.startsWith("0")
+            )
+        );
 
     }
 
 
     // =====================================================
-    // FORM ALANLARI
+    // PLAKA DÜZENLEME
     // =====================================================
 
-    const appointmentForm =
-        document.getElementById("appointmentForm");
+    if (plateInput) {
 
-    const nameInput =
-        document.getElementById("name");
+        plateInput.addEventListener("input", function () {
 
-    const phoneInput =
-        document.getElementById("phone");
+            plateInput.value =
+                plateInput.value
+                    .toLocaleUpperCase("tr-TR")
+                    .replace(/[^0-9A-ZÇĞİÖŞÜ ]/g, "")
+                    .slice(0, 12);
 
-    const carInput =
-        document.getElementById("car");
+        });
 
-    const timeSelect =
-        document.getElementById("time");
+    }
 
-    const noteInput =
-        document.getElementById("note");
+
+    // =====================================================
+    // FORM MESAJI
+    // =====================================================
+
+    function showFormStatus(message, type) {
+
+        if (!formStatus) {
+            return;
+        }
+
+        formStatus.textContent = message;
+
+        formStatus.classList.remove(
+            "success",
+            "error"
+        );
+
+        if (type) {
+            formStatus.classList.add(type);
+        }
+
+    }
 
 
     // =====================================================
@@ -196,50 +321,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 event.preventDefault();
 
+                showFormStatus("", "");
 
-                // -------------------------
-                // DEĞERLERİ AL
-                // -------------------------
 
                 const name =
-                    nameInput
-                        ? nameInput.value.trim()
-                        : "";
+                    nameInput?.value.trim() || "";
 
                 const phone =
-                    phoneInput
-                        ? phoneInput.value.trim()
-                        : "";
+                    phoneInput?.value.trim() || "";
 
                 const car =
-                    carInput
-                        ? carInput.value.trim()
-                        : "";
+                    carInput?.value.trim() || "";
+
+                const plate =
+                    plateInput?.value.trim() || "";
+
+                const km =
+                    kmInput?.value.trim() || "";
 
                 const service =
-                    serviceSelect
-                        ? serviceSelect.value
-                        : "";
+                    serviceSelect?.value || "";
 
                 const date =
-                    dateInput
-                        ? dateInput.value
-                        : "";
+                    dateInput?.value || "";
 
                 const time =
-                    timeSelect
-                        ? timeSelect.value
-                        : "";
+                    timeSelect?.value || "";
 
                 const note =
-                    noteInput
-                        ? noteInput.value.trim()
-                        : "";
+                    noteInput?.value.trim() || "";
 
 
-                // -------------------------
-                // BOŞ ALAN KONTROLÜ
-                // -------------------------
+                // -----------------------------------------
+                // ZORUNLU ALANLAR
+                // -----------------------------------------
 
                 if (
                     !name ||
@@ -250,8 +365,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     !time
                 ) {
 
-                    alert(
-                        "Lütfen zorunlu alanların tamamını doldurun."
+                    showFormStatus(
+                        "Lütfen yıldızlı alanların tamamını doldurun.",
+                        "error"
                     );
 
                     return;
@@ -259,31 +375,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                // -------------------------
-                // TELEFON KONTROLÜ
-                // -------------------------
+                // -----------------------------------------
+                // TELEFON
+                // -----------------------------------------
 
                 if (!isValidPhone(phone)) {
 
-                    alert(
-                        "Lütfen geçerli bir telefon numarası girin."
+                    showFormStatus(
+                        "Lütfen geçerli bir telefon numarası girin.",
+                        "error"
                     );
 
-                    if (phoneInput) {
-                        phoneInput.focus();
-                    }
+                    phoneInput?.focus();
 
                     return;
 
                 }
 
 
-                // -------------------------
-                // TARİH KONTROLÜ
-                // -------------------------
+                // -----------------------------------------
+                // TARİH
+                // -----------------------------------------
 
                 const selectedDate =
-                    new Date(date + "T00:00:00");
+                    new Date(date + "T12:00:00");
 
                 const today =
                     new Date();
@@ -291,10 +406,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 today.setHours(0, 0, 0, 0);
 
 
-                if (selectedDate < today) {
+                if (
+                    Number.isNaN(
+                        selectedDate.getTime()
+                    )
+                ) {
 
-                    alert(
-                        "Geçmiş bir tarih için randevu oluşturamazsınız."
+                    showFormStatus(
+                        "Lütfen geçerli bir tarih seçin.",
+                        "error"
                     );
 
                     return;
@@ -302,53 +422,112 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                // -------------------------
-                // TARİHİ FORMATLA
-                // -------------------------
+                if (selectedDate < today) {
+
+                    showFormStatus(
+                        "Geçmiş tarih için randevu oluşturamazsınız.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                // -----------------------------------------
+                // PAZAR GÜNÜ KAPALI
+                // -----------------------------------------
+
+                if (selectedDate.getDay() === 0) {
+
+                    showFormStatus(
+                        "Servisimiz Pazar günleri kapalıdır. Lütfen başka bir tarih seçin.",
+                        "error"
+                    );
+
+                    dateInput?.focus();
+
+                    return;
+
+                }
+
+
+                // -----------------------------------------
+                // KM KONTROLÜ
+                // -----------------------------------------
+
+                if (
+                    km &&
+                    Number(km) < 0
+                ) {
+
+                    showFormStatus(
+                        "Kilometre bilgisi geçerli değil.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
 
                 const formattedDate =
                     formatDate(date);
 
 
-                // -------------------------
+                // -----------------------------------------
                 // WHATSAPP MESAJI
-                // -------------------------
+                // -----------------------------------------
 
                 const message =
 `Merhaba AutoPrime,
 
-Servis randevusu oluşturmak istiyorum.
+Servis randevu talebi oluşturmak istiyorum.
 
 👤 Ad Soyad: ${name}
 📞 Telefon: ${phone}
 🚗 Araç: ${car}
+🔢 Plaka: ${plate || "Belirtilmedi"}
+🛣️ Kilometre: ${km ? km + " km" : "Belirtilmedi"}
+
 🔧 Hizmet: ${service}
 📅 Tarih: ${formattedDate}
 🕒 Saat: ${time}
-📝 Not: ${note || "Belirtilmedi"}
+
+📝 Not:
+${note || "Belirtilmedi"}
 
 Randevu uygunluk durumunu teyit edebilir misiniz?`;
 
 
-                // -------------------------
-                // WHATSAPP LİNKİ
-                // -------------------------
-
                 const whatsappURL =
-                    "https://wa.me/" +
-                    whatsappNumber +
-                    "?text=" +
-                    encodeURIComponent(message);
+                    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
 
-                // -------------------------
-                // WHATSAPP'I AÇ
-                // -------------------------
-
-                window.open(
-                    whatsappURL,
-                    "_blank"
+                showFormStatus(
+                    "WhatsApp açılıyor. Talebinizi gönderdikten sonra servis onayını bekleyin.",
+                    "success"
                 );
+
+
+                // Popup engelleyicilere karşı kullanıcı
+                // submit işlemi içinde açılıyor.
+                const newWindow =
+                    window.open(
+                        whatsappURL,
+                        "_blank",
+                        "noopener,noreferrer"
+                    );
+
+
+                // Bazı mobil tarayıcılarda yeni pencere
+                // engellenirse aynı sekmede aç.
+                if (!newWindow) {
+
+                    window.location.href =
+                        whatsappURL;
+
+                }
 
             }
         );
@@ -357,78 +536,47 @@ Randevu uygunluk durumunu teyit edebilir misiniz?`;
 
 
     // =====================================================
-    // SAYFADAKİ DİĞER WHATSAPP BUTONLARINI
-    // AYNI NUMARAYA BAĞLA
+    // WHATSAPP BUTONLARI
     // =====================================================
 
-    const whatsappLinks =
-        document.querySelectorAll(
-            '.floating-whatsapp, .contact-whatsapp'
-        );
+    document
+        .querySelectorAll(
+            ".floating-whatsapp, .contact-whatsapp"
+        )
+        .forEach(function (link) {
 
-    whatsappLinks.forEach(function (link) {
-
-        link.href =
-            "https://wa.me/" +
-            whatsappNumber;
-
-    });
-
-
-    // =====================================================
-    // TELEFON LINKLERİNİ AYNI NUMARAYA BAĞLA
-    // =====================================================
-
-    const phoneLinks =
-        document.querySelectorAll(
-            'a[href^="tel:"]'
-        );
-
-    phoneLinks.forEach(function (link) {
-
-        link.href =
-            "tel:+905555555555";
-
-    });
-
-});// =====================================================
-// MOBİL HAMBURGER MENÜ
-// =====================================================
-
-const mobileMenuButton =
-    document.getElementById("mobileMenuButton");
-
-const mainNav =
-    document.getElementById("mainNav");
-
-if (mobileMenuButton && mainNav) {
-
-    mobileMenuButton.addEventListener("click", function () {
-
-        mainNav.classList.toggle("mobile-open");
-
-        if (mainNav.classList.contains("mobile-open")) {
-            mobileMenuButton.textContent = "✕";
-        } else {
-            mobileMenuButton.textContent = "☰";
-        }
-
-    });
-
-
-    const mobileMenuLinks =
-        mainNav.querySelectorAll("a");
-
-    mobileMenuLinks.forEach(function (link) {
-
-        link.addEventListener("click", function () {
-
-            mainNav.classList.remove("mobile-open");
-
-            mobileMenuButton.textContent = "☰";
+            link.href =
+                `https://wa.me/${whatsappNumber}`;
 
         });
 
-    });
 
-}
+    // =====================================================
+    // TELEFON BUTONLARI
+    // =====================================================
+
+    document
+        .querySelectorAll('a[href^="tel:"]')
+        .forEach(function (link) {
+
+            link.href =
+                `tel:${businessPhone}`;
+
+        });
+
+
+    // =====================================================
+    // FOOTER YILI
+    // =====================================================
+
+    const currentYear =
+        document.getElementById("currentYear");
+
+    if (currentYear) {
+
+        currentYear.textContent =
+            new Date().getFullYear();
+
+    }
+
+});
