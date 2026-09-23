@@ -895,6 +895,16 @@ footer p {
     font-size: 13px;
 }
 
+.developer-credit a {
+    color: var(--red);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.developer-credit a:hover {
+    text-decoration: underline;
+}
+
 
 /* =====================================================
    WHATSAPP
